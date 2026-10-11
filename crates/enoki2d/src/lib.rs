@@ -49,6 +49,9 @@ pub mod prelude {
         Attractor, EmissionShape, EnokiPlugin, NoAutoAabb, Particle2dEffect, ParticleEffectHandle,
         ParticleSpawner,
     };
+    pub use bevy_render::render_resource::{
+        BlendComponent, BlendFactor, BlendOperation, BlendState,
+    };
 }
 
 pub(crate) const PARTICLE_VERTEX_OUT: Handle<Shader> =

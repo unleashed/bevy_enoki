@@ -56,6 +56,26 @@ pub trait Particle2dMaterial: AsBindGroup + Asset + Clone + Sized {
     fn fragment_shader() -> ShaderRef {
         super::PARTICLE_COLOR_FRAG.into()
     }
+
+    /// Blend state of the material's render pipeline. Defaults to alpha blending.
+    ///
+    /// Additive blending, for example:
+    /// ```
+    /// # use bevy_enoki::prelude::*;
+    /// fn blend_state() -> BlendState {
+    ///     BlendState {
+    ///         color: BlendComponent {
+    ///             src_factor: BlendFactor::One,
+    ///             dst_factor: BlendFactor::One,
+    ///             operation: BlendOperation::Add,
+    ///         },
+    ///         alpha: BlendComponent::OVER,
+    ///     }
+    /// }
+    /// ```
+    fn blend_state() -> BlendState {
+        BlendState::ALPHA_BLENDING
+    }
 }
 
 pub struct Particle2dMaterialPlugin<M: Particle2dMaterial> {
@@ -611,7 +631,7 @@ impl<M: Particle2dMaterial> SpecializedRenderPipeline for Particle2dPipeline<M> 
                 constants: vec![],
                 targets: vec![Some(ColorTargetState {
                     format: key.mesh_key.target_format(),
-                    blend: Some(BlendState::ALPHA_BLENDING),
+                    blend: Some(M::blend_state()),
                     write_mask: ColorWrites::ALL,
                 })],
             }),
