@@ -58,9 +58,12 @@ pub(crate) const PARTICLE_VERTEX_OUT: Handle<Shader> =
     uuid_handle!("8d6bc2d4-7577-4890-a3a4-0faea3a27448");
 pub(crate) const PARTICLE_VERTEX: Handle<Shader> =
     uuid_handle!("57c98346-305c-461a-8cdc-7b3fac8be0ca");
-pub(crate) const PARTICLE_COLOR_FRAG: Handle<Shader> =
+/// Fragment shader of [`ColorParticle2dMaterial`], for custom materials with the same bindings.
+pub const PARTICLE_COLOR_FRAG: Handle<Shader> =
     uuid_handle!("f60a0cf3-19d3-4425-b6f8-b06bf7ba2f34");
-pub(crate) const PARTICLE_SPRITE_FRAG: Handle<Shader> =
+/// Fragment shader of [`SpriteParticle2dMaterial`], for custom materials with the same bindings
+/// (for example a sprite material with its own [`Particle2dMaterial::blend_state`]).
+pub const PARTICLE_SPRITE_FRAG: Handle<Shader> =
     uuid_handle!("9b13ccf9-eea1-4515-bdd1-1b4131368f71");
 
 pub struct EnokiPlugin;
