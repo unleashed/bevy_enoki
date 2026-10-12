@@ -132,7 +132,7 @@ impl ParticleStore {
     }
 
     #[allow(clippy::too_many_arguments)]
-    fn push(
+    pub fn push(
         &mut self,
         transform: Transform,
         duration: f32,
