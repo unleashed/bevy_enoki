@@ -36,6 +36,9 @@ mod sprite;
 mod update;
 mod values;
 
+/// Advances every spawner and its particles; public so other systems can order against it.
+pub use update::update_spawner;
+
 #[allow(unused)]
 pub mod prelude {
     pub use super::color::ColorParticle2dMaterial;

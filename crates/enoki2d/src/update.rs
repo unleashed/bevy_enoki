@@ -95,6 +95,11 @@ impl ParticleStore {
         self.duration.is_empty()
     }
 
+    /// Sets every particle's life fraction (0 born, 1 expired), e.g. to pin a capture's age.
+    pub fn set_age_fraction(&mut self, fraction: f32) {
+        self.duration_fraction.fill(fraction);
+    }
+
     pub fn clear(&mut self) {
         macro_rules! clear {
             ($($field:ident),+ $(,)?) => {
@@ -251,7 +256,7 @@ pub(crate) fn remove_finished_spawner(
         })
 }
 
-pub(crate) fn update_spawner(
+pub fn update_spawner(
     mut particles: Query<(
         Entity,
         &mut ParticleStore,
