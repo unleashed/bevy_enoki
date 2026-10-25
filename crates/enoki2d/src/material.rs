@@ -109,7 +109,12 @@ impl<M: Particle2dMaterial> Plugin for Particle2dMaterialPlugin<M> {
                 Render,
                 (
                     queue_particles::<M>.in_set(RenderSystems::Queue),
-                    prepare_particles_instance_buffers::<M>.in_set(RenderSystems::PrepareResources),
+                    // The view bind group below reads the view uniform buffer, which
+                    // prepare_view_uniforms may reallocate in this same set when the view
+                    // count grows; order after it, as Bevy's own view bind groups are.
+                    prepare_particles_instance_buffers::<M>
+                        .in_set(RenderSystems::PrepareResources)
+                        .after(bevy_render::view::prepare_view_uniforms),
                 ),
             );
     }
